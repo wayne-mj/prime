@@ -1,0 +1,7 @@
+Modules/
+.vscode/
+.DS_Store
+
+prime
+*.o
+*.mod
