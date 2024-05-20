@@ -1,16 +1,13 @@
 FC=gfortran
-MODULES=./Modules
-PRIME=prime
-PRIME_MOD=prime_module
+FFLAGS=-O3 -Wall -Wextra
+SRC=prime_module.f90 prime.f90
+OBJ=${SRC:.f90=.o}
 
-all: clean prime
+%.o: %.f90
+	$(FC) $(FFLAGS) -o $@ -c $<
 
-prime: $(PRIME).f90 $(PRIME_MOD).f90
-	[ ! -e $(MODULES) ] && mkdir -p $(MODULES)
-	$(FC) -c -J$(MODULES) $(PRIME_MOD).f90
-	$(FC) -c -I$(MODULES) $(PRIME).f90	 
-	$(FC) -o $(PRIME) $(PRIME).o $(PRIME_MOD).o
+prime: $(OBJ)
+	$(FC) $(FFLAGS) -o $@ $(OBJ)
 
 clean:
-	rm -rf $(PRIME) $(PRIME).o $(PRIME_MOD).o $(MODULES) *.mod
-
+	rm -f *.o *.mod prime
