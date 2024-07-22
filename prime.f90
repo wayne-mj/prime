@@ -7,12 +7,12 @@ program prime
     logical :: is_prime
 
     ! Define the number of prime numbers to find
-    limit = 10**2
+    limit = 100**2
     primes = 0
     number = 0
 
     ! Find the prime numbers
-    do while (primes < limit)
+    do while (primes .lt. limit)
         is_prime = prime_number(number)
 
         if (is_prime .eqv. .true.) then
