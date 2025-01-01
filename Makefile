@@ -1,14 +1,20 @@
 FC=gfortran
-FFLAGS=-O3 -Wall -Wextra
-SRC=prime_module.f90 prime.f90
-OBJ=${SRC:.f90=.o}
-BASE=${SRC:.f90=}
+FFLAGS=-O3 -Wall -Wextra -Jmods
+MOD=lib/prime_module.f90 
+PROG=src/prime.f90
+OBJ=$(PROG:.f90=.o)
+MOD_OBJ=$(MOD:.f90=.o)
+BASE=$(PROG:.f90=)
+
+all: prime
 
 %.o: %.f90
-	$(FC) $(FFLAGS) -o $@ -c $<
+	$(FC) $(FFLAGS) -I mods -o $@ -c $<
 
-prime: $(OBJ)
-	$(FC) $(FFLAGS) -o $@ $(OBJ)
+$(OBJ): $(MOD_OBJ)
+
+prime: $(MOD_OBJ) $(OBJ)
+	$(FC) $(FFLAGS) -I mods -o $@ $(MOD_OBJ) $(OBJ)
 
 clean:
-	rm -f *.o *.mod $(BASE)
+	rm -f *.o mods/*.mod prime src/*.o lib/*.o
