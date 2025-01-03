@@ -2,6 +2,7 @@
 ! Prime number module
 !
 module prime_module
+    use iso_fortran_env
     implicit none
 
     contains
@@ -10,7 +11,7 @@ module prime_module
     !   Port of a Python function to check if a number is prime
     !
     logical function prime_number (num)
-        integer, intent(in) :: num
+        integer(int32), intent(in) :: num
         integer :: div
 
         if (num <=1 ) then
