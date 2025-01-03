@@ -1,10 +1,11 @@
 program prime
+    use iso_fortran_env
     ! Find x prime numbers
     use prime_module
     implicit none
 
-    integer :: primes,  number
-    integer :: limit, ierr
+    integer(int32) :: primes,  number, limit
+    integer :: ierr
     logical :: is_prime
     character(len=100) :: arg
 
